@@ -10,6 +10,17 @@ const HttpService = class {
       baseURL: 'http://localhost:3000',
       timeout: 20000
     })
+
+    // interceptors
+    this._http.interceptors.response.use(res => {
+      if (!this._http.defaults.headers.common['Authorization'] && res.data.token) {
+        this._http.defaults.headers.common['Authorization'] = res.data.token
+      }
+      return res
+    }, err => {
+      // Do something with response error
+      return Promise.reject(err)
+    })
   }
 
   _get (url, config) {
@@ -17,9 +28,6 @@ const HttpService = class {
       this._http.get(url, config)
         .then(res => {
           resolve(res)
-        })
-        .catch(err => {
-          reject(err)
         })
     })
   }
@@ -30,9 +38,6 @@ const HttpService = class {
         .then(res => {
           resolve(res)
         })
-        .catch(err => {
-          reject(err)
-        })
     })
   }
 
@@ -42,9 +47,6 @@ const HttpService = class {
         .then(res => {
           resolve(res)
         })
-        .catch(err => {
-          reject(err)
-        })
     })
   }
 
@@ -53,9 +55,6 @@ const HttpService = class {
       this._http.get(url, config)
         .then(res => {
           resolve(res)
-        })
-        .catch(err => {
-          reject(err)
         })
     })
   }

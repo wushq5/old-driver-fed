@@ -1,40 +1,33 @@
 <template>
-  <div>
-    <navMenu></navMenu>
-    <el-row type="flex" justify="center" align="middle">
-      <el-col :span="8">
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item label="Name">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item label="Desc">
-            <el-input type="textarea" v-model="form.desc"></el-input>
-          </el-form-item>
-          <el-form-item label="Brithday">
-            <el-input v-model="form.birthday"></el-input>
-          </el-form-item>
-          <el-form-item label="Height">
-            <el-input v-model="form.height"></el-input>
-          </el-form-item>
-          <el-form-item label="Weight">
-            <el-input v-model="form.weight"></el-input>
-          </el-form-item>
-          <el-form-item label="BWH">
-            <el-input v-model="form.bwh"></el-input>
-          </el-form-item>
-          <el-form-item label="Photo">
-            <div class="upload-container">
-              <input type="file" id="photo" class="upload" @change="onChange()" />
-            </div>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">提交</el-button>
-            <el-button @click="back">取消</el-button>
-          </el-form-item>
-        </el-form>
-      </el-col>
-    </el-row>
-  </div>
+  <el-form class="form" ref="form" :model="form" label-width="80px">
+    <el-form-item label="Name">
+      <el-input v-model="form.name"></el-input>
+    </el-form-item>
+    <el-form-item label="Desc">
+      <el-input type="textarea" v-model="form.desc"></el-input>
+    </el-form-item>
+    <el-form-item label="Brithday">
+      <el-input v-model="form.birthday"></el-input>
+    </el-form-item>
+    <el-form-item label="Height">
+      <el-input v-model="form.height"></el-input>
+    </el-form-item>
+    <el-form-item label="Weight">
+      <el-input v-model="form.weight"></el-input>
+    </el-form-item>
+    <el-form-item label="BWH">
+      <el-input v-model="form.bwh"></el-input>
+    </el-form-item>
+    <el-form-item label="Photo">
+      <div class="upload-container">
+        <input type="file" id="photo" class="upload" @change="onChange()" />
+      </div>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="onSubmit">提交</el-button>
+      <el-button @click="back">取消</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script>
@@ -77,7 +70,7 @@
 
         cgiService.createOneTeacher(data).then(res => {
           // redirect
-          this.$router.replace({name: 'home'})
+          // this.$router.replace({name: 'home'})
         }).catch(err => {
           console.log(err)
         })
@@ -96,8 +89,8 @@
 </script>
 
 <style scoped>
-  .container {
-    display: flex;
+  .form {
+    width: 25%;
   }
 
   .upload-container {

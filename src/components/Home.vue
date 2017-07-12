@@ -1,53 +1,36 @@
 <template>
-  <div>
-    <navMenu></navMenu>  
-    <el-row :gutter="20">
-      <el-col :span="4" v-for="(teacher, index) in teachers" :key="teacher">
-        <el-card :body-style="{ padding: '0px' }" @click.native="toTeacher(teacher)">
-          <img :src="teacher.photo" class="image">
-          <div class="name">
-            <span v-text="teacher.name"></span>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+  <div class="container">
+    <navMenu class="nav"></navMenu>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   import navMenu from './comps/navMenu'
-  import cgiService from '../service/cgiService'
   export default {
-    name: 'teachers',
+    name: 'home',
     components: {
       navMenu
-    },
-    data () {
-      return {
-        teachers: null
-      }
-    },
-    methods: {
-      init () {
-        cgiService.getAllTeachers().then((res) => {
-          if (res.data && res.data.length > 0) {
-            this.teachers = res.data
-          }
-        })
-      },
-
-      toTeacher (teacher) {
-        this.$store.commit('setTeacher', { teacher })
-        this.$router.push('teacher')
-      }
-    },
-    mounted: function () {
-      this.init()
     }
   }
 </script>
 
 <style scoped>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .form {
+    width: 100%;
+    margin-top: 10px;
+  }
+
   .el-card {
     margin-top: 10px;
   }

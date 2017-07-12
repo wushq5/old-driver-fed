@@ -5,7 +5,7 @@
       <el-input v-model="name" placeholder="username"></el-input>
       <p class="txt-tag">Password</p>
       <el-input v-model="password" type="password" placeholder="password"></el-input>
-      <el-button class="btn-login" type="success" @click="login">Login</el-button>
+      <el-button class="btn-login" type="info" @click="signUp">Sign Up</el-button>
     </el-col>
   </el-row>
 </template>
@@ -20,14 +20,12 @@ export default {
     }
   },
   methods: {
-    login: function () {
-      cgiService.signIn({
+    signUp: function () {
+      cgiService.signUp({
         name: this.name,
         password: this.password
       }).then(res => {
-        cgiService.getInfo().then((res) => {
-          console.log('OOOOOK')
-        })
+        console.info(res)
       }).catch(err => {
         console.log(err)
       })
